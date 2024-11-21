@@ -1,11 +1,28 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <!-- 新增site1路由 -->
+    <router-link to="/site1">Subapp Login</router-link> |
+    <!-- 新增site2路由 -->
+    <router-link to="/site2">Site2</router-link>
   </nav>
   <router-view />
+  <!-- 新增site1渲染节点 -->
+  <div id="site1" />
+  <!-- 新增site2渲染节点 -->
+  <div id="site2" />
 </template>
-
+<script lang="js">
+export default {
+  name: 'AppView',
+  computed: {
+    hasToken() {
+      return localStorage.getItem('accessToken')
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
