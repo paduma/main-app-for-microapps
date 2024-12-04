@@ -1,27 +1,29 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <!-- 新增site1路由 -->
-    <router-link to="/site1">Subapp Login</router-link> |
-    <!-- 新增site2路由 -->
-    <router-link to="/site2">Site2</router-link>
-  </nav>
-  <router-view />
-  <!-- 新增site1渲染节点 -->
-  <div id="site1" />
-  <!-- 新增site2渲染节点 -->
-  <div id="site2" />
+  <HomeLayout v-if="hasToken">
+    <!-- <v-main>
+      <router-view></router-view>
+    </v-main> -->
+  </HomeLayout>
+  <div id="subapp-login" />
 </template>
-<script lang="js">
-export default {
-  name: 'AppView',
-  computed: {
-    hasToken() {
-      return localStorage.getItem('accessToken')
-    }
-  }
-}
+<script setup>
+import { ref, computed, provide } from 'vue';
+import { useRouter } from "vue-router";
+import HomeLayout from '@/layout/HomeLayout.vue';
+
+const token = ref(localStorage.getItem('accessToken'))
+const hasToken = computed(() => !!token.value)
+
+const router = useRouter()
+
+const logout = () => {
+  token.value = null; // 设置 token 为 null，触发计算属性更新  
+  localStorage.removeItem('accessToken')
+  router.push('/subapp-login')
+};
+
+// 提供一个方法，以便于在 HomeLayout 中调用  
+provide('logout', logout);  
 </script>
 <style>
 #app {

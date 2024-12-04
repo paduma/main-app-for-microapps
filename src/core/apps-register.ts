@@ -18,16 +18,16 @@ const lifeCycles = {
 };
 
 // 注册
-const microAppStargt = () => {
-  const token = localStorage.getItem("token");
+const microAppStart = () => {
+  // const token = localStorage.getItem("token");
 
-  if (token) {
-    registerMicroApps(appsNeedToken, lifeCycles);
-    setDefaultMountApp("dashboard");
-    start();
-  }
+  // if (token) {
+  //   registerMicroApps(appsNeedToken, lifeCycles);
+  //   setDefaultMountApp("/subapp-dashboard");
+  // }
+  // registerMicroApps(appsNeedToken, lifeCycles);
   registerMicroApps(appsNoToken, lifeCycles);
   start();
 };
 
-export { microAppStargt, start };
+export { microAppStart };

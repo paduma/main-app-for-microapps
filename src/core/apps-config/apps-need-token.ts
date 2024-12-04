@@ -1,9 +1,9 @@
 const apps: any[] = [
   {
-    name: "dashboard",
+    name: "subapp-dashboard",
     entry: "http://localhost:9002/",
-    container: "#site2",
-    activeRule: "/dashboard",
+    container: "#subapp-container",
+    activeRule: "/subapp-dashboard",
   },
 ];
 export default apps;
