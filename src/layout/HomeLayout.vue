@@ -15,7 +15,13 @@
 </v-menu> -->
       <template v-slot:append>
         <v-btn @click="drawer = true">切换应用</v-btn>
-        <v-switch v-model="switchTheme" @click="toggleTheme" :label="themeColorShown" hide-details inset></v-switch>
+        <v-switch
+          v-model="switchTheme"
+          @click="toggleTheme"
+          :label="themeColorShown"
+          hide-details
+          inset
+        ></v-switch>
         <v-btn @click="handleLogout">登出</v-btn>
       </template>
     </v-app-bar>
@@ -35,14 +41,21 @@
           <v-container fluid>
             <v-row>
               <!-- 左侧：业务领域 -->
-              <v-col cols="4" style="
+              <v-col
+                cols="4"
+                style="
                   border-right: 1px solid #ddd;
                   max-height: 80vh;
                   overflow-y: auto;
-                ">
+                "
+              >
                 <v-list>
                   <v-list-item-group v-model="selectedCategory" color="primary">
-                    <v-list-item v-for="(category, index) in categories" :key="index" @click="selectCategory(index)">
+                    <v-list-item
+                      v-for="(category, index) in categories"
+                      :key="index"
+                      @click="selectCategory(index)"
+                    >
                       <v-list-item-title>{{ category.name }}</v-list-item-title>
                     </v-list-item>
                   </v-list-item-group>
@@ -53,13 +66,18 @@
               <v-col cols="8" style="max-height: 80vh; overflow-y: auto">
                 <v-list>
                   <v-list-item-group v-if="selectedSubApps.length > 0">
-                    <v-list-item v-for="(subApp, subIndex) in selectedSubApps" :key="subIndex"
-                      @click="navigateTo(subApp.route)">
+                    <v-list-item
+                      v-for="(subApp, subIndex) in selectedSubApps"
+                      :key="subIndex"
+                      @click="navigateTo(subApp.route)"
+                    >
                       <v-list-item-title>{{ subApp.name }}</v-list-item-title>
                     </v-list-item>
                   </v-list-item-group>
                   <v-list-item v-else>
-                    <v-list-item-title>选择一个业务领域以查看子应用</v-list-item-title>
+                    <v-list-item-title
+                      >选择一个业务领域以查看子应用</v-list-item-title
+                    >
                   </v-list-item>
                 </v-list>
               </v-col>
@@ -101,7 +119,7 @@ function toggleTheme() {
   switchTheme.value = true;
 }
 
-// 应用状态  
+// 应用状态
 const drawer = ref(false);
 const selectedCategory = ref(null);
 const currentApp = ref(null);
@@ -141,23 +159,23 @@ const selectedSubApps = computed(() => {
 //   { id: 2, text: "消息 2" },
 // ];
 
-// 导航到子应用  
+// 导航到子应用
 function navigateTo(app) {
-  currentApp.value = app; // 更新当前应用  
-  router.push(`/${app}`); // 跳转路由  
-  drawer.value = false
+  currentApp.value = app; // 更新当前应用
+  router.push(`/${app}`); // 跳转路由
+  drawer.value = false;
 }
 
-// 选择业务领域  
+// 选择业务领域
 function selectCategory(index) {
-  selectedCategory.value = index; // 选择业务领域  
+  selectedCategory.value = index; // 选择业务领域
 }
 
-const logout = inject('logout');
+const logout = inject("logout");
 
-// 登出按钮点击事件  
+// 登出按钮点击事件
 const handleLogout = () => {
-  logout(); // 调用提供的 logout 函数  
+  logout(); // 调用提供的 logout 函数
 };
 </script>
 <style>

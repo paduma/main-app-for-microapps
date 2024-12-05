@@ -7,23 +7,23 @@
   <div id="subapp-login" />
 </template>
 <script setup>
-import { ref, computed, provide } from 'vue';
+import { ref, computed, provide } from "vue";
 import { useRouter } from "vue-router";
-import HomeLayout from '@/layout/HomeLayout.vue';
+import HomeLayout from "@/layout/HomeLayout.vue";
 
-const token = ref(localStorage.getItem('accessToken'))
-const hasToken = computed(() => !!token.value)
+const token = ref(localStorage.getItem("accessToken"));
+const hasToken = computed(() => !!token.value);
 
-const router = useRouter()
+const router = useRouter();
 
 const logout = () => {
-  token.value = null; // 设置 token 为 null，触发计算属性更新  
-  localStorage.removeItem('accessToken')
-  router.push('/subapp-login')
+  token.value = null; // 设置 token 为 null，触发计算属性更新
+  localStorage.removeItem("accessToken");
+  router.push("/subapp-login");
 };
 
-// 提供一个方法，以便于在 HomeLayout 中调用  
-provide('logout', logout);  
+// 提供一个方法，以便于在 HomeLayout 中调用
+provide("logout", logout);
 </script>
 <style>
 #app {
